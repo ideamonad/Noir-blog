@@ -18,6 +18,11 @@
                :reset (include-css "/css/reset.css")
                :blog.js (include-js "/js/blog.js")})
 
+(def contact-links [{:url "https://github.com/pgarland" :text "Github"}
+                    {:url "https://plus.google.com/100929493239667214451" :text "Google+"}
+                    {:url "https://secure.flickr.com/photos/pgarland" :text "Flickr"}
+                    {:url "http://www.twitter.com/garlandp" :text "Twitter"}])
+
 ;; Helper partials
 
 (defpartial build-head [incls]
