@@ -6,7 +6,7 @@
 (def blog-name "Obscureshapes")
 
 ;; Links and includes
-(def main-links [{:url "/blog/admin" :text "Admin"}])
+(def main-links [])
 
 (def admin-links [{:url "/blog/" :text "Blog"}
                   {:url "/blog/admin" :text "Posts"}
@@ -16,6 +16,7 @@
 (def includes {:jquery (include-js "http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js")
                :default (include-css "/css/default.css")
                :reset (include-css "/css/reset.css")
+               :custom (include-css "/css/custom.css")
                :blog.js (include-js "/js/blog.js")})
 
 (def contact-links [{:url "https://github.com/pgarland" :text "Github"}
@@ -34,11 +35,20 @@
             [:li
              (link-to {:class cls} url text)])
 
+(defpartial contact-bar []
+  (html5
+   [:div#left
+    (image "/img/blog-portrait-2011.png")
+    "Phillip Garland"
+    [:br]
+    "pgarland@gmail.com"
+    (map link-item contact-links)]))
+
 ;; Layouts
 
 (defpartial main-layout [& content]
             (html5
-              (build-head [:reset :default :jquery :blog.js])
+              (build-head [:reset :default :jquery :custom :blog.js])
               [:body
                [:div#wrapper
                 [:div.content
@@ -46,7 +56,8 @@
                   [:h1 (link-to "/blog/" blog-name)]
                   [:ul.nav
                    (map link-item main-links)]]
-                 content]]]))
+                 [:ul.nav (contact-bar)
+                  content]]]]))
 
 (defpartial admin-layout [& content]
             (html5
