@@ -3,6 +3,8 @@
        hiccup.core
        hiccup.page-helpers))
 
+(def blog-name "Obscureshapes")
+
 ;; Links and includes
 (def main-links [{:url "/blog/admin" :text "Admin"}])
 
@@ -20,7 +22,7 @@
 
 (defpartial build-head [incls]
             [:head
-             [:title "The Noir Blog"]
+             [:title blog-name]
              (map #(get includes %) incls)])
 
 (defpartial link-item [{:keys [url cls text]}]
@@ -36,7 +38,7 @@
                [:div#wrapper
                 [:div.content
                  [:div#header
-                  [:h1 (link-to "/blog/" "The Noir blog")]
+                  [:h1 (link-to "/blog/" blog-name)]
                   [:ul.nav
                    (map link-item main-links)]]
                  content]]]))
