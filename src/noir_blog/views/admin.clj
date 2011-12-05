@@ -143,7 +143,7 @@
                       (user-fields user)))))
 
 (defpage [:post "/blog/admin/user/edit/:old-name"] {:keys [old-name] :as user}
-         (if (users/edit! old-name user)
+         (if (users/edit! user)
            (resp/redirect "/blog/admin/users")
            (render "/blog/admin/user/edit/:old-name" user)))
 
