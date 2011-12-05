@@ -52,7 +52,8 @@
     (when (valid? user)
       (store! user))))
 
-(defn edit! [user]
+(defn edit! [{username :username :as user}]
+  (remove! username)
   (add! user))
 
 (defn remove! [username]
