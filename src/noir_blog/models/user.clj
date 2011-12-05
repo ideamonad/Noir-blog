@@ -52,9 +52,9 @@
     (when (valid? user)
       (store! user))))
 
-(defn edit! [{username :username :as user}]
-  (remove! username)
-  (add! user))
+(defn edit! [old-name {username :username :as user}]
+  (do (remove! old-name)
+      (add! user)))
 
 (defn remove! [username]
   (db/update! :users dissoc username))
