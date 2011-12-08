@@ -5,6 +5,7 @@
                            [noir "1.2.2"]
                            [org.markdownj/markdownj "0.3.0-1.0.2b4"]
                            [simpledb "0.1.4"]]
-            :dev-dependencies [[swank-clojure "1.4.0-SNAPSHOT"]]
+            :dev-dependencies [[swank-clojure "1.4.0-SNAPSHOT"]
+                               [clojure-source "1.3.0"]]
             :main noir-blog.server)
 
