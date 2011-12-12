@@ -5,6 +5,7 @@
             [clj-time.coerce :as coerce]
             [clojure.string :as string]
             [noir-blog.models.user :as users]
+            [noir-blog.models.tag :as tags]
             [noir.validation :as vali]
             [noir.session :as session])
   (:import com.petebevin.markdown.MarkdownProcessor))
@@ -75,6 +76,11 @@
       (assoc :date (tform/unparse date-format ts))
       (assoc :tme (tform/unparse time-format ts)))))
 
+(defn wrap-tags [{:keys [tags] :as post}]
+  (let [tags (string/split tags #",")]
+    (-> post
+        (assoc :tags tags))))
+    
 (defn prepare-new [{:keys [title body] :as post}]
   (let [id (next-id)
         ts (ctime/now)]
@@ -83,7 +89,8 @@
       (assoc :username (users/me))
       (wrap-time)
       (wrap-moniker)
-      (wrap-markdown))))
+      (wrap-markdown)
+      (wrap-tags))))
 
 (defn valid? [{:keys [title body]}]
   (vali/rule (vali/has-value? title)
@@ -98,10 +105,11 @@
 
 (defn add! [post]
   (when (valid? post)
-    (let [{:keys [id moniker] :as final} (prepare-new post)]
+    (let [{:keys [id moniker tags] :as final} (prepare-new post)]
       (db/update! :posts assoc id final)
       (db/update! :post-ids conj id)
-      (db/update! :post-monikers assoc moniker id))))
+      (db/update! :post-monikers assoc moniker id)
+      (db/update! :tags tags/tag-update-fn tags id))))
 
 (defn edit! [{:keys [id title] :as post}]
   (let [{orig-moniker :moniker :as original} (id->post id)
