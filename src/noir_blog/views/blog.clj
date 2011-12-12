@@ -5,11 +5,12 @@
   (:require [noir-blog.models.post :as posts]
             [noir-blog.views.common :as common]
             [noir-blog.models.user :as user]
-            [noir.response :as resp]))
+            [noir.response :as resp]
+            [clojure.string :as string]))
 
 ;; Page structure
 
-(defpartial post-item [{:keys [perma-link title md-body date tme] :as post}]
+(defpartial post-item [{:keys [perma-link title md-body date tme tags] :as post}]
             (when post
               [:li.post
                [:h2 (link-to perma-link title)]
@@ -18,11 +19,12 @@
                 [:li tme]
                 (when (user/admin?)
                   [:li (link-to (posts/edit-url post) "edit")])]
-               [:div.content md-body]]))
+               [:div.content md-body]
+               [:div.content "Tags: " (string/join tags)]]))
 
 (defpartial blog-page [items]
             (common/main-layout
-              [:ul.posts
+             [:ul.posts
                (map post-item items)]))
 
 ;; Blog pages

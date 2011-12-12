@@ -21,11 +21,12 @@
 (defpartial error-text [errors]
             [:p (string/join "<br/>" errors)])
 
-(defpartial post-fields [{:keys [title body]}]
+(defpartial post-fields [{:keys [title body tags]}]
             (vali/on-error :title error-text)
             (text-field {:placeholder "Title"} :title title)
             (vali/on-error :body error-text)
-            (text-area {:placeholder "Body"} :body body))
+            (text-area {:placeholder "Body"} :body body)
+            (text-field {:placeholder "Tags"} :tags tags))
 
 (defpartial user-fields [{:keys [username] :as usr}]
             (vali/on-error :username error-text)
