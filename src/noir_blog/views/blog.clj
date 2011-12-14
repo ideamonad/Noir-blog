@@ -20,7 +20,7 @@
                 (when (user/admin?)
                   [:li (link-to (posts/edit-url post) "edit")])]
                [:div.content md-body]
-               [:div.content "Tags: " (string/join tags ", ")]]))
+               [:div.content "Tags: " (string/join "," tags)]]))
 
 (defpartial blog-page [items]
             (common/main-layout
