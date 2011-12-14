@@ -26,7 +26,7 @@
             (text-field {:placeholder "Title"} :title title)
             (vali/on-error :body error-text)
             (text-area {:placeholder "Body"} :body body)
-            (text-field {:placeholder "Tags"} :tags tags))
+            (text-field {:placeholder "Tags"} :tags (string/join "," tags)))
 
 (defpartial user-fields [{:keys [username] :as usr}]
             (vali/on-error :username error-text)
