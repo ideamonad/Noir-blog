@@ -119,7 +119,9 @@
                                       (wrap-tags))]
     (db/update! :posts assoc id (merge original final))
     (db/update! :post-monikers dissoc orig-moniker) ;; remove the old moniker entry in case it changed
-    (db/update! :post-monikers assoc moniker id)))
+    (db/update! :post-monikers assoc moniker id)
+    (db/update! :tags tags/remove-id id)
+    (db/update! :tags tags/add-tags tags id)))
 
 
 (defn remove! [id]
