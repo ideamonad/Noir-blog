@@ -109,23 +109,26 @@
       (db/update! :posts assoc id final)
       (db/update! :post-ids conj id)
       (db/update! :post-monikers assoc moniker id)
-      (db/update! :tags tags/tag-update-fn tags id))))
+      (db/update! :tags tags/add-tags tags id))))
 
-(defn edit! [{:keys [id title] :as post}]
+(defn edit! [{:keys [id title tags] :as post}]
   (let [{orig-moniker :moniker :as original} (id->post id)
         {:keys [moniker] :as final} (-> post
                                       (wrap-moniker)
-                                      (wrap-markdown))]
+                                      (wrap-markdown)
+                                      (wrap-tags))]
     (db/update! :posts assoc id (merge original final))
     (db/update! :post-monikers dissoc orig-moniker) ;; remove the old moniker entry in case it changed
     (db/update! :post-monikers assoc moniker id)))
+
 
 (defn remove! [id]
   (let [{:keys [moniker]} (id->post id)
         neue-ids (remove #{id} (db/get :post-ids))]
     (db/put! :post-ids neue-ids) 
     (db/update! :posts dissoc id)
-    (db/update! :post-monikers dissoc moniker)))
+    (db/update! :post-monikers dissoc moniker)
+    (db/update! :tags tags/remove-id id)))
 
 (defn init! []
     (db/put! :next-post-id -1)
