@@ -1,6 +1,6 @@
 /* Site specific styles. */
 body { font-family: Verdana; background: #FFFFFF; color: #d1d9e1; }
-h1 { font-size:72px; color: #004c65; paddin:55px 0 0 0;}
+h1 { font-size:72px; color: #004c65; margin-right: 5%}
 h2 { font-size:24px; }
 ul {list-style:none; }
 a { color: #56BF90; text-decoration:none;}
