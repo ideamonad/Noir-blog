@@ -33,7 +33,7 @@
          (resp/redirect "/blog/"))
 
 (defpage "/blog/" []
-         (blog-page (posts/get-latest)))
+  (resp/redirect "/blog/page/1"))
 
 (defpage "/blog/page/:page" {:keys [page]}
          (blog-page (posts/get-page page)))
