@@ -22,10 +22,13 @@
                [:div.content md-body]
                [:div.content "Tags: " (string/join "," tags)]]))
 
-(defpartial blog-page [items]
+(defpartial blog-page [page items]
             (common/main-layout
              [:ul.posts
-               (map post-item items)]))
+              (map post-item items)
+              (when (not (= (Integer. page) 1))
+                [:linkbutton (link-to (str "/blog/page/" (dec (Integer. page))) "Earlier Posts")])
+              [:linkbutton (link-to (str "/blog/page/" (inc (Integer. page))) "Later Posts")]]))
 
 ;; Blog pages
 
@@ -36,11 +39,11 @@
   (resp/redirect "/blog/page/1"))
 
 (defpage "/blog/page/:page" {:keys [page]}
-         (blog-page (posts/get-page page)))
+         (blog-page page (posts/get-page page)))
 
 (defpage "/blog/page/" []
          (render "/blog/page/:page" {:page 1}))
 
 (defpage "/blog/view/:perma" {:keys [perma]}
          (if-let [cur (posts/moniker->post perma)]
-           (blog-page [cur])))
+           (blog-page 0 [cur])))
