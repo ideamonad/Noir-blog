@@ -27,8 +27,8 @@
              [:ul.posts
               (map post-item items)
               (when (not (= (Integer. page) 1))
-                [:linkbutton (link-to (str "/blog/page/" (dec (Integer. page))) "Earlier Posts")])
-              [:linkbutton (link-to (str "/blog/page/" (inc (Integer. page))) "Later Posts")]]))
+                [:linkbutton (link-to (str "/blog/page/" (dec (Integer. page))) "Newer Posts")])
+              [:linkbutton (link-to (str "/blog/page/" (inc (Integer. page))) "Older Posts")]]))
 
 ;; Blog pages
 
