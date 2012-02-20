@@ -8,3 +8,9 @@ ul.posts li.post { float:inline; display:inline; width: 100%; padding:15px; back
 ul.posts li.post .content { float:left; display:inline; width:100%; color:#babbbb;}
 
 ol li {margin-left: 30px;}
+
+linkbutton { background: none repeat scroll 0 0 #474949; 
+             border-radius: 8px 8px 8px 8px; 
+             border: 2px solid #616363;
+             padding: 8px; 
+             margin-left: 10px}
