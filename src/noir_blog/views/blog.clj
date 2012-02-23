@@ -26,9 +26,12 @@
             (common/main-layout
              [:ul.posts
               (map post-item items)
-              (when (not (= (Integer. page) 1))
-                [:linkbutton (link-to (str "/blog/page/" (dec (Integer. page))) "Newer Posts")])
-              [:linkbutton (link-to (str "/blog/page/" (inc (Integer. page))) "Older Posts")]]))
+              (when page
+                (when (> (Integer. page) 1)
+                  [:linkbutton (link-to (str "/blog/page/" (dec (Integer. page))) "Newer Posts")]))
+              (when page
+                (when (= (count items) 10)
+                  [:linkbutton (link-to (str "/blog/page/" (inc (Integer. page))) "Older Posts")]))]))
 
 ;; Blog pages
 
@@ -46,4 +49,4 @@
 
 (defpage "/blog/view/:perma" {:keys [perma]}
          (if-let [cur (posts/moniker->post perma)]
-           (blog-page 0 [cur])))
+           (blog-page nil [cur])))
