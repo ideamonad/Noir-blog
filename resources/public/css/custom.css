@@ -6,6 +6,8 @@ ul.posts { padding-left:15px; float:left; display:inline; width:50%}
 ul.posts li.post { float:inline; display:inline; width: 100%; padding:15px; background: #e8e8e8;  border-radius: 10px; margin-bottom:20px; border:2px solid:#4a4b4b; }
 
 ul.posts li.post .content { float:left; display:inline; width:100%; color:#000000;}
+ul.posts li.post .tags { display:inline; width:100%; color:#000000;}
+ul.posts li.post .social { float: left; display:inline; width:100%; color:#000000;}
 
 ol li {margin-left: 30px;}
 
