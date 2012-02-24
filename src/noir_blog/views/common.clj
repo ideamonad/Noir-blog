@@ -17,7 +17,9 @@
                :default (include-css "/css/default.css")
                :reset (include-css "/css/reset.css")
                :custom (include-css "/css/custom.css")
-               :blog.js (include-js "/js/blog.js")})
+               :blog.js (include-js "/js/blog.js")
+               :twitter.js (include-js "/js/twitter.js")
+               })
 
 (def contact-links [{:url "https://github.com/pgarland" :text "Github"}
                     {:url "https://plus.google.com/100929493239667214451" :text "Google+"}
@@ -48,7 +50,7 @@
 
 (defpartial main-layout [& content]
             (html5
-              (build-head [:reset :default :jquery :custom :blog.js])
+              (build-head [:reset :default :jquery :custom :blog.js :twitter.js])
               [:body
                [:div#wrapper
                 [:div.content
