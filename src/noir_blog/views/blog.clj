@@ -20,7 +20,8 @@
                 (when (user/admin?)
                   [:li (link-to (posts/edit-url post) "edit")])]
                [:div.content md-body]
-               [:div.content "Tags: " (string/join "," tags)]]))
+;;               [:div.tags "Tags: " (string/join "," tags)]
+               [:div.social (link-to {:class "twitter-share-button" :data-count "none"} "https://twitter.com/share")]]))
 
 (defpartial blog-page [page items]
             (common/main-layout
