@@ -37,6 +37,9 @@
 (defn get-latest []
   (get-page 1))
 
+(defn get-all []
+  (ids->posts (db/get :post-ids)))
+
 ;; Mutations and checks
 
 (defn next-id []
