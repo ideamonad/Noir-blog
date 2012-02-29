@@ -13,7 +13,7 @@
     (doto feed
       (.setFeedType "atom_1.0")
       (.setTitle common/blog-name)
-      (.setLink "http://localhost:8080/feed.atom")
+      (.setLink "http://blog.obscureshapes.com/blog/feed.atom")
       (.setDescription "A blog about biology, cats, computers, etc")
       (.setEntries (make-entries)))))
 
