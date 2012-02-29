@@ -21,10 +21,11 @@
                :twitter.js (include-js "/js/twitter.js")
                })
 
-(def contact-links [{:url "https://github.com/pgarland" :text "Github"}
-                    {:url "https://plus.google.com/100929493239667214451" :text "Google+"}
-                    {:url "https://secure.flickr.com/photos/pgarland" :text "Flickr"}
-                    {:url "http://www.twitter.com/garlandp" :text "Twitter"}])
+(def contact-links [{:url "https://github.com/pgarland" :content "Github"}
+                    {:url "https://plus.google.com/100929493239667214451" :content "Google+"}
+                    {:url "https://secure.flickr.com/photos/pgarland" :content "Flickr"}
+                    {:url "http://www.twitter.com/garlandp" :content "Twitter"}
+                    {:url "http://blog.obscureshapes.com/blog/feed.atom" :cls "image" :content (image "/img/feed-icon-28x28.png")}])
 
 ;; Helper partials
 
@@ -33,9 +34,9 @@
              [:title blog-name]
              (map #(get includes %) incls)])
 
-(defpartial link-item [{:keys [url cls text]}]
+(defpartial link-item [{:keys [url cls content]}]
             [:li
-             (link-to {:class cls} url text)])
+             (link-to {:class cls} url content)])
 
 (defpartial contact-bar []
   (html5
