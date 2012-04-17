@@ -1,8 +1,9 @@
 (ns noir-blog.views.admin
   (:use noir.core
         hiccup.core
-        hiccup.page-helpers
-        hiccup.form-helpers)
+        hiccup.element
+        hiccup.page
+        hiccup.form)
   (:require [noir.session :as session]
             [noir.validation :as vali]
             [noir.response :as resp]
