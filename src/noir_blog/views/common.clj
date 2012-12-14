@@ -1,7 +1,8 @@
 (ns noir-blog.views.common
   (use noir.core
        hiccup.core
-       hiccup.page-helpers))
+       hiccup.element
+       hiccup.page))
 
 (def blog-name "Obscureshapes")
 

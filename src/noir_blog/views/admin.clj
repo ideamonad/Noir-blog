@@ -1,8 +1,9 @@
 (ns noir-blog.views.admin
   (:use noir.core
         hiccup.core
-        hiccup.page-helpers
-        hiccup.form-helpers)
+        hiccup.element
+        hiccup.page
+        hiccup.form)
   (:require [noir.session :as session]
             [noir.validation :as vali]
             [noir.response :as resp]
@@ -19,7 +20,7 @@
 ;; Partials
 
 (defpartial error-text [errors]
-            [:p (string/join "<br/>" errors)])
+            [:span (string/join "" errors)])
 
 (defpartial post-fields [{:keys [title body tags]}]
             (vali/on-error :title error-text)
@@ -31,6 +32,7 @@
 (defpartial user-fields [{:keys [username] :as usr}]
             (vali/on-error :username error-text)
             (text-field {:placeholder "Username"} :username username)
+            (vali/on-error :password error-text)
             (password-field {:placeholder "Password"} :password))
 
 (defpartial post-item [{:keys [title] :as post}]
@@ -121,12 +123,12 @@
            [:ul.items
             (map user-item (users/all))]))
 
-(defpage "/blog/admin/user/add" {}
+(defpage "/blog/admin/user/add" {:as user}
          (common/admin-layout
            (form-to [:post "/blog/admin/user/add"]
                       [:ul.actions
                         [:li (link-to {:class "submit"} "/" "Add")]]
-                    (user-fields {})
+                    (user-fields user)
                     (submit-button {:class "submit"} "add user"))))
 
 (defpage [:post "/blog/admin/user/add"] {:keys [username password] :as neue-user}
