@@ -19,6 +19,7 @@
                :custom (include-css "/css/custom.css")
                :blog.js (include-js "/js/blog.js")
                :twitter.js (include-js "/js/twitter.js")
+               :mathjax (include-js "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML")
                })
 
 (def contact-links [{:url "https://github.com/pgarland" :content "Github"}
@@ -51,7 +52,7 @@
 
 (defpartial main-layout [& content]
             (html5
-              (build-head [:reset :default :jquery :custom :blog.js :twitter.js])
+              (build-head [:reset :default :jquery :custom :blog.js :twitter.js :mathjax])
               [:body
                [:div#wrapper
                 [:div.content
