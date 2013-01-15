@@ -20,6 +20,7 @@
                :custom (include-css "/css/custom.css")
                :blog.js (include-js "/js/blog.js")
                :twitter.js (include-js "/js/twitter.js")
+               :gsearch.js (include-js "/js/gsearch.js")
                })
 
 (def contact-links [{:url "https://github.com/pgarland" :content "Github"}
@@ -48,11 +49,16 @@
     "pgarland@gmail.com"
     (map link-item contact-links)]))
 
+(defpartial search-bar []
+  (html5
+   [:div#right
+    [:gcse:search]]))
+
 ;; Layouts
 
 (defpartial main-layout [& content]
             (html5
-              (build-head [:reset :default :jquery :custom :blog.js :twitter.js])
+              (build-head [:reset :default :jquery :custom :blog.js :twitter.js :gsearch.js])
               [:body
                [:div#wrapper
                 [:div.content
@@ -60,8 +66,10 @@
                   [:h1 (link-to "/blog/" blog-name)]
                   [:ul.nav
                    (map link-item main-links)]]
-                 [:ul.nav (contact-bar)
-                  content]]]]))
+                 [:ul.nav 
+                  (contact-bar)
+                  content
+                  (search-bar)]]]]))
 
 (defpartial admin-layout [& content]
             (html5
