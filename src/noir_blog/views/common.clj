@@ -67,10 +67,7 @@
                   [:h1 (link-to "/blog/" blog-name)]
                   [:ul.nav
                    (map link-item main-links)]]
-                 [:ul.nav 
-                  (contact-bar)
-                  content
-                  (search-bar)]]]]))
+                 content]]]))
 
 (defpartial admin-layout [& content]
             (html5

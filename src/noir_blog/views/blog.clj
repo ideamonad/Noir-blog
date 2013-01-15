@@ -30,14 +30,17 @@
 
 (defpartial blog-page [page items]
             (common/main-layout
-             [:ul.posts
-              (map post-item items)
-              (when page
-                (when (> (Integer. page) 1)
-                  [:linkbutton (link-to (str "/blog/page/" (dec (Integer. page))) "Newer Posts")]))
-              (when page
+             [:ul.nav
+              (common/contact-bar)
+              [:ul.posts
+               (map post-item items)
+               (when page
+                 (when (> (Integer. page) 1)
+                   [:linkbutton (link-to (str "/blog/page/" (dec (Integer. page))) "Newer Posts")]))
+               (when page
                 (when (= (count items) 10)
-                  [:linkbutton (link-to (str "/blog/page/" (inc (Integer. page))) "Older Posts")]))]))
+                  [:linkbutton (link-to (str "/blog/page/" (inc (Integer. page))) "Older Posts")]))]
+              (common/search-bar)]))
 
 ;; Blog pages
 
